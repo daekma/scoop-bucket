@@ -21,7 +21,7 @@
     },
     "post_install": [
         "$phpconfd = \"$persist_dir\\..\\php\\cli\\conf.d\"",
-        "$ini = \"zend_extension=$dir\\php_apcu.dll`n\"",
+        "$ini = \"extension=$dir\\php_apcu.dll\"",
         "if (!(Test-Path \"$phpconfd\\apcu.ini\")) {",
         "    ensure $phpconfd | Out-Null",
         "    Write-Output \"Enabling extension '$phpconfd\\apcu.ini'\"",
