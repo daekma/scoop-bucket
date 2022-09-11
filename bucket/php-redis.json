@@ -1,0 +1,48 @@
+{
+    "version": "5.3.7",
+    "description": "This extension provides an API for communicating with Redis servers.",
+    "homepage": "https://pecl.php.net/package/redis",
+    "license": {
+        "identifier": "PHP-3.01",
+        "url": "https://php.net/license/3_01.txt"
+    },
+    "notes": [
+        "Otherwise add '$dir\\php_redis.dll' to your php.ini"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://windows.php.net/downloads/pecl/releases/redis/5.3.7/php_redis-5.3.7-8.1-ts-vs16-x64.zip",
+            "hash": "351b7deb740e75ee66da2093b135ec4081cc5852a05ba5034d20e52979b6b2ae"
+        },
+        "32bit": {
+            "url": "https://windows.php.net/downloads/pecl/releases/redis/5.3.7/php_redis-5.3.7-8.1-ts-vs16-x86.zip",
+            "hash": "a450281ffcf459a49f2caaec17eca369dd8dd395ec7e22b3e785d0c8663a4d31"
+        }
+    },
+    "post_install": [
+        "$phpconfd = \"$persist_dir\\..\\php\\cli\\conf.d\"",
+        "$ini = \"extension=$dir\\php_redis.dll\"",
+        "if (!(Test-Path \"$phpconfd\\redis.ini\")) {",
+        "    ensure $phpconfd | Out-Null",
+        "    Write-Output \"Enabling extension '$phpconfd\\redis.ini'\"",
+        "    Add-Content -Value $ini -Path \"$phpconfd\\redis.ini\"",
+        "} else {",
+        "    Write-Host -f Yellow \"PHP was not installed through scoop, you have to activate php_redis.dll manually! Add the following:`n\"",
+        "    Write-Host -f Cyan \"$ini`n`n\"",
+        "}"
+    ],
+    "checkver": {
+        "url": "https://pecl.php.net/package/redis",
+        "regex": "/package/redis/([\\d.]+)/windows"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://windows.php.net/downloads/pecl/releases/redis/$version/php_redis-$version-8.1-ts-vs16-x64.zip"
+            },
+            "32bit": {
+                "url": "https://windows.php.net/downloads/pecl/releases/redis/$version/php_redis-$version-8.1-ts-vs16-x86.zip"
+            }
+        }
+    }
+}
